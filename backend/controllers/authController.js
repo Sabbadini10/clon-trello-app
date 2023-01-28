@@ -1,35 +1,27 @@
-if([name,email,password].includes("")){
-    throw createError(400,"Todos los campos son obligatorios!");
-
-}
+const errorResponse = require('../helpers/createError');
 const createError = require('http-errors');
 
 
-module.exports = (res, error, method) => {
-    console.log(error);
-    return res.status(error.status || 500).json({
-        ok : false,
-        msg : error.message || `Upss, hubo un error en ${method}`
-    })
-}
-return errorResponse(res,error, "REGISTER")
-const errorResponse = require('../helpers/errorResponse');
 
 module.exports = {
     register: async (req,res) => {
         try {
+            const {name,email,password} = req.body;
+
+            if([name,email,password].includes("")){
+                let error = new Error("Todos los campos son obligatorios");
+                error.status = 400;
+                throw error
+            };
+
             return res.status(201).json({
                 ok : true,
-                msg: 'USUARIO REGISTRADO'
+                msg :'Usuario Registrado'
             })
         } catch (error) {
-            console.log(error)
-        return res.status(error.status || 500).json({
-            ok: false,
-            msg: error.message || 'HUBO UN ERROR EN REGISTER'
-        })
+            return errorResponse(res,error, "REGISTER")
         }
-    },
+        },
     login: async (req,res) => {
         try {
             return res.status(201).json({

@@ -1,15 +1,26 @@
+import Login  from '../pages/Login';
+import './App.css';
 
-import { useState } from 'react'
-import './App.css'
-import { Formulario } from './components/Formulario'
-import { Navbar } from './components/Navbar'
 
 function App() {
   return (
-    <div className="App">
-      <Navbar/>
-      <Formulario/>
-    </div>
+    <div className="App bg-opacity-75">
+  <ul class="background">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+      <Login />
+      </div>
   )
 }
 
