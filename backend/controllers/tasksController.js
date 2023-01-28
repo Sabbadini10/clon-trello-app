@@ -3,13 +3,13 @@ module.exports = {
         try {
             return res.status(201).json({
                 ok : true,
-                msg: 'USUARIO LOGUEADO'
+                msg: 'TASK LIST'
             })
         } catch (error) {
             console.log(error)
         return res.status(error.status || 500).json({
             ok: false,
-            msg: error.message || 'HUBO UN ERROR'
+            msg: error.message || 'HUBO UN ERROR TASK LIST'
         })
         }
     },
@@ -17,13 +17,13 @@ module.exports = {
         try {
             return res.status(201).json({
                 ok : true,
-                msg: 'USUARIO LOGUEADO'
+                msg: 'TASK STORE'
             })
         } catch (error) {
             console.log(error)
         return res.status(error.status || 500).json({
             ok: false,
-            msg: error.message || 'HUBO UN ERROR'
+            msg: error.message || 'HUBO UN ERROR TASK STORE'
         })
         }
     },  
@@ -31,13 +31,13 @@ module.exports = {
     try {
         return res.status(201).json({
             ok : true,
-            msg: 'USUARIO LOGUEADO'
+            msg: 'TASK DETAIL'
         })
     } catch (error) {
         console.log(error)
     return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || 'HUBO UN ERROR'
+        msg: error.message || 'HUBO UN ERROR TASK DETAIL'
     })
     }
 },
@@ -45,13 +45,13 @@ module.exports = {
     try {
         return res.status(201).json({
             ok : true,
-            msg: 'token enviado'
+            msg: 'TASK UPDATE'
         })
     } catch (error) {
         console.log(error)
     return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || 'HUBO UN ERROR'
+        msg: error.message || 'HUBO UN ERROR TASK UPDATE'
     })
     }
 },
@@ -59,13 +59,13 @@ module.exports = {
     try {
         return res.status(201).json({
             ok : true,
-            msg: 'token enviado'
+            msg: 'TASK REMOVE'
         })
     } catch (error) {
         console.log(error)
     return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || 'HUBO UN ERROR'
+        msg: error.message || 'HUBO UN ERROR TASK REMOVE'
     })
     }
 },
@@ -73,13 +73,13 @@ module.exports = {
     try {
         return res.status(201).json({
             ok : true,
-            msg: 'token enviado'
+            msg: 'TASK CHANGE STATE'
         })
     } catch (error) {
         console.log(error)
     return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || 'HUBO UN ERROR'
+        msg: error.message || 'HUBO UN ERROR TASK CHANGE STATE'
     })
     }
 }

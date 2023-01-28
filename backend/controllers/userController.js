@@ -3,13 +3,13 @@ module.exports = {
         try {
             return res.status(201).json({
                 ok : true,
-                msg: 'USUARIO LOGUEADO'
+                msg: 'PERFIL USUARIO'
             })
         } catch (error) {
             console.log(error)
         return res.status(error.status || 500).json({
             ok: false,
-            msg: error.message || 'HUBO UN ERROR'
+            msg: error.message || 'HUBO UN ERROR PERFIL USUARIO'
         })
         }
     }

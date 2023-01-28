@@ -2,10 +2,12 @@ require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
+const connectDB = require('./database/config');
 
 
 const app = express();
 
+connectDB();
 app
   .use(logger('dev'))
   .use(express.json())
@@ -15,6 +17,7 @@ var apiAuth = require('./routes/auth')
 var apiUsers = require('./routes/users')
 var apiProject = require('./routes/project')
 var apiTask = require('./routes/task')
+var indexHome = require('./routes/home')
 
   /* RUTAS */
 app
@@ -22,6 +25,7 @@ app
   .use('/api/users', apiUsers)
   .use('/api/projects', apiProject)
   .use('/api/tasks', apiTask)
+  .use('/', indexHome)
 
 
 // catch 404 and forward to error handler

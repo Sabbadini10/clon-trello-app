@@ -3,13 +3,13 @@ module.exports = {
         try {
             return res.status(201).json({
                 ok : true,
-                msg: 'USUARIO LOGUEADO'
+                msg: 'LISTA PROJECT'
             })
         } catch (error) {
             console.log(error)
         return res.status(error.status || 500).json({
             ok: false,
-            msg: error.message || 'HUBO UN ERROR'
+            msg: error.message || 'HUBO UN ERROR PROJECT LIST'
         })
         }
     },
@@ -17,13 +17,13 @@ module.exports = {
         try {
             return res.status(201).json({
                 ok : true,
-                msg: 'USUARIO LOGUEADO'
+                msg: 'STORE PROJECT'
             })
         } catch (error) {
             console.log(error)
         return res.status(error.status || 500).json({
             ok: false,
-            msg: error.message || 'HUBO UN ERROR'
+            msg: error.message || 'HUBO UN ERROR EN PROJECT STORE'
         })
         }
     },  
@@ -31,13 +31,13 @@ module.exports = {
     try {
         return res.status(201).json({
             ok : true,
-            msg: 'USUARIO LOGUEADO'
+            msg: 'DETALLE PROJECT'
         })
     } catch (error) {
         console.log(error)
     return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || 'HUBO UN ERROR'
+        msg: error.message || 'HUBO UN ERROR EN PROJECT DETAIL'
     })
     }
 },
@@ -45,13 +45,13 @@ module.exports = {
     try {
         return res.status(201).json({
             ok : true,
-            msg: 'token enviado'
+            msg: 'UPDATE PROJECT'
         })
     } catch (error) {
         console.log(error)
     return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || 'HUBO UN ERROR'
+        msg: error.message || 'HUBO UN ERROR UPDATE PROJECT'
     })
     }
 },
@@ -59,13 +59,13 @@ module.exports = {
     try {
         return res.status(201).json({
             ok : true,
-            msg: 'token enviado'
+            msg: 'REMOVE PROJECT'
         })
     } catch (error) {
         console.log(error)
     return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || 'HUBO UN ERROR'
+        msg: error.message || 'HUBO UN ERROR REMOVE PROJECT'
     })
     }
 },
@@ -73,13 +73,13 @@ module.exports = {
     try {
         return res.status(201).json({
             ok : true,
-            msg: 'token enviado'
+            msg: 'ADD COLABORATOR PROJECT'
         })
     } catch (error) {
         console.log(error)
     return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || 'HUBO UN ERROR'
+        msg: error.message || 'HUBO UN ERROR ADD COLABORATOR'
     })
     }
 },
@@ -87,13 +87,13 @@ removeColaborator: async (req,res) => {
     try {
         return res.status(201).json({
             ok : true,
-            msg: 'token enviado'
+            msg: 'REMOVE COLABORATOR PROJECT'
         })
     } catch (error) {
         console.log(error)
     return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || 'HUBO UN ERROR'
+        msg: error.message || 'HUBO UN ERROR REMOVE COLABORATOR'
     })
     }
 }
