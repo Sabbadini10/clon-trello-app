@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../styles/Register&Login.css';
+import PasswordField from "../src/components/PasswordField";
 
 function Login() {
   return (
@@ -15,22 +16,15 @@ function Login() {
         <i class="input-icon fa-regular fa-envelope"></i>
         <input className="input-field" id="email" type="email" placeholder="Ingresá tu email" />
       </div>
-      <div className="field mb-2">
-        <i className="input-icon fa-solid fa-lock"></i>
-        <input className="input-field" 
-          id="password"
-          type="password"
-          placeholder="Ingrese su contraseña"
-        />
-      </div>
+      <PasswordField />
       <div className="d-flex flex-column align-items-center justify-content-center mt-1 mb-3">
-      <Button type="submit">Iniciar sessión</Button>
+      <Button className="btn" type="submit">Iniciar sessión</Button>
       </div>
       
     </Form>
     <Nav className="d-flex flex-column align-items-center justify-content-center">
     <Link to={"/register"}>¿No tenés una cuenta? Registrate</Link>
-     <Link to={"/forget-password"}>Olvidé mi password</Link>
+     <Link to={"/forgetPassword"}>Olvidé mi password</Link>
     </Nav>
   </div>
       </div>

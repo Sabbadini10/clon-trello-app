@@ -20,6 +20,7 @@
     margin-top: 5em;
     text-align: center;
     background: #2a2b38;
+    border: 3px solid  #ffeba7;
    }
    
    /*Inputs*/
@@ -31,6 +32,7 @@
     justify-content: center;
     gap: .5em;
     background-color: #1f2029;
+    border: 3px solid  #ffeba7;
     border-radius: 4px;
     padding: .5em 1em;
    }

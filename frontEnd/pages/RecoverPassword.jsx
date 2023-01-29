@@ -1,20 +1,22 @@
 import React from "react";
+import { Button, Form } from 'react-bootstrap';
+import '../styles/Register&Login.css';
+import PasswordField from "../src/components/PasswordField";
 
-export const RecoverPassword = () => {
+function RecoverPassword() {
   return (
-    <>
-      <h1>Reestablecé tu contraseña</h1>
-      <form action="">
-        <div>
-          <label htmlFor="password">Nueva contraseña</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Escribí tu nueva contraseña"
-          />
-        </div>
-        <button type="submit">Guardar tu contraseña</button>
-      </form>
-    </>
+    <div className="contenedorRegister d-flex flex-column align-items-center justify-content-center">
+    <div className="card d-flex flex-column align-items-center justify-content-center">
+      <h1 className="register-titulo text-light" >Reestablecé tu contraseña</h1>
+      <div className="card2 d-flex flex-column">
+      <Form action="">
+      <PasswordField />
+        <Button className="btn" type="submit">Guardar tu contraseña</Button>
+      </Form>
+      </div>
+    </div>
+    </div>
   );
 };
+
+export default RecoverPassword;
