@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ConfirmAccount = () => {
+function ConfirmAccount() {
   return (
     <>
       <h1>Confirma tu cuenta</h1>
@@ -8,3 +8,5 @@ export const ConfirmAccount = () => {
     </>
   );
 };
+
+export default ConfirmAccount;

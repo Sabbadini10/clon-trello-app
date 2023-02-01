@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import '../styles/Register&Login.css';
+import '../src/assets/styles/Register&Login.css';
 import PasswordField from "../src/components/PasswordField";
 
 function Login() {

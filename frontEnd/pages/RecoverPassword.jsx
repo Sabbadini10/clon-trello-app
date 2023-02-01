@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form } from 'react-bootstrap';
-import '../styles/Register&Login.css';
+import '../src/assets/styles/Register&Login.css';
 import PasswordField from "../src/components/PasswordField";
 
 function RecoverPassword() {

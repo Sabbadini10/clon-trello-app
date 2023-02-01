@@ -1,10 +1,33 @@
 import React from "react";
 import { Button, Form, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
-
-import '../styles/Register&Login.css';
+import '../src/assets/styles/Register&Login.css';
 import PasswordField from "../src/components/PasswordField";
+const exRegEmail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}/;
+
+const handleShowAlert = (msg) => {
+  setAlert({
+    msg
+  });
+
+  setTimeout(() => {
+    setAlert({});
+  }, 3000);
+}
+
+try {
+
+  const {data} = await clientAxios.post('/auth/register',{
+    name,
+    email,
+    password
+  });
+
+  console.log(data.msg);
+  
+} catch (error) {
+  console.error(error)
+}
 
 
 function Register() {
@@ -39,7 +62,7 @@ function Register() {
         
       </Form>
       <Nav className="d-flex flex-column align-items-center justify-content-center">
-        <Link to={"/login"}>¿Estás registrado? Iniciá sesión</Link>
+        <Link to={"/"}>¿Estás registrado? Iniciá sesión</Link>
       </Nav>
     </div>
         </div>
