@@ -7,4 +7,4 @@
         }
     }
 
-    module.export = mostrarContrasena();
+    module.exports = mostrarContrasena();

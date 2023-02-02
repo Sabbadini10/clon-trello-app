@@ -7,17 +7,30 @@ const connectDB = require('./database/config');
 
 const app = express();
 
+const cors = require('cors');
+const whiteList = [process.env.URL_FRONTEND];
+const corsOptions = {
+  origin : function (origin, cb) {
+    if(whiteList.includes(origin)){
+      cb(null, true)
+    }else{
+      cb(new Error('Error de Cors'))
+    }
+  }
+}
+
 connectDB();
 app
   .use(logger('dev'))
   .use(express.json())
   .use(express.urlencoded({ extended: false }))
-  
+  .use(cors())
+
 var apiAuth = require('./routes/auth')
 var apiUsers = require('./routes/users')
 var apiProject = require('./routes/project')
 var apiTask = require('./routes/task')
-var indexHome = require('./routes/home')
+
 
   /* RUTAS */
 app
@@ -25,7 +38,7 @@ app
   .use('/api/users', apiUsers)
   .use('/api/projects', apiProject)
   .use('/api/tasks', apiTask)
-  .use('/', indexHome)
+
 
 
 // catch 404 and forward to error handler

@@ -1,8 +1,8 @@
 const createError = require('http-errors');
 const User = require('../database/models/User');
-const errorResponse = require('../helpers/createError');
-const createJWT = require('../helpers/createJWT');
-const createTokenRandom = require('../helpers/createTokenRandom');
+const errorResponse = require('../helpers/errorResponse');
+const createJWT = require('../helpers/generateJWT');
+const createTokenRandom = require('../helpers/generateTokenRandom');
 const { confirmRegister, forgotPassword } = require('../helpers/sendMails');
 
 
@@ -37,11 +37,11 @@ module.exports = {
                 email : userStore.email,
                 token : userStore.token
             })
-
+            console.log(userStore)
             return res.status(201).json({
                 ok : true,
                 msg :'Usuario Registrado',
-                data : userStore
+                user : userStore
             })
 
         } catch (error) {
