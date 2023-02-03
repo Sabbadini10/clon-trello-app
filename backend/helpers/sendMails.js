@@ -36,7 +36,7 @@ const transport = nodemailer.createTransport({
 
         try {
             const infoMail = await transport.sendMail({
-                from : "Project Manager <info@projectmanager.com>",
+                from : "Project Manager <matiassabbadini24@gmail.com>",
                 to : email,
                 subject : "Reestablecé tu contraseña",
                 text : "Reestablecé tu contraseña en Project Manager",

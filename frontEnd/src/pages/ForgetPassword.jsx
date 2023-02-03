@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { clientAxios } from "../config/clientAxios";
 import { Button, Form, Nav } from "react-bootstrap";
-import "../src/assets/styles/Register&Login.css";
+import "../assets/styles/Register&Login.css";
 import { Link } from "react-router-dom";
-import AlertError from "../src/components/AlertError";
+import Alert from "../components/Alert";
 import Swal from "sweetalert2";
 
 function ForgetPassword() {
@@ -49,6 +49,7 @@ function ForgetPassword() {
     <div className="contenedorRegister d-flex flex-column align-items-center justify-content-center">
       <div className="card d-flex flex-column align-items-center justify-content-center">
         <h1 className="register-titulo text-light">Recupera tu acceso</h1>
+        {alert.msg && <Alert {...alert} />}
         <div className="card2 d-flex flex-column">
           <Form onSubmit={handleSubmit}>
             <div className="field mb-2">

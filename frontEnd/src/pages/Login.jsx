@@ -1,82 +1,84 @@
 import React, {useState} from "react";
 import { Button, Form, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import '../src/assets/styles/Register&Login.css';
-import PasswordField from "../src/components/PasswordField";
+import { Link, useNavigate } from 'react-router-dom';
+import '../assets/styles/Register&Login.css';
 const exRegEmail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}/;
-import { useForm } from "../src/hooks/useForm";
+import { useForm } from "../hooks/useForm";
+import useAuth from "../hooks/useAuth";
 import { clientAxios } from "../config/clientAxios";
+import Alert from "../components/Alert";
 
-function Login() {
-  const [showPassword, setShowPassword] = useState(false);
+
+export const Login = () => {
   const [alert, setAlert] = useState({});
+  const {setAuth} = useAuth();
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
   const [sending, setSending] = useState(false);
 
-  const {formValues, handleInputChange, reset} = useForm({
-    email : "",
-    password : "",
+
+  const handleShowAlert = (msg, time = true) => {
+    setAlert({
+      msg: msg,
+    });
+  
+    if (time) {
+      setTimeout(() => {
+        setAlert({});
+      }, 3000);
+    }
+  /* console.log(alert) */
+    reset();
+  };
+
+
+  const { formValues, handleInputChange, reset } = useForm({
+    email: "",
+    password: "",
   });
 
-  const {email, password} = formValues;
-
+  const { email, password } = formValues;
+ 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formValues);
-    
-    if([email,password].includes("")){
-      handleShowAlert("Todos los campos son obligatorios");
-      return null
-    };
 
-    if(!exRegEmail.test(email)){
-      handleShowAlert("El email tiene un formato inválido");
-      return null
-    };
+    if ([email, password].includes("")) {
+      handleShowAlert("Todos los campos son obligatorios");
+
+      console.log(alert)
+      return null;
+    }
+
 
     try {
 
-      setSending(true)
-
-      const {user} = await clientAxios.post('/auth/login',{
+      const {data} = await clientAxios.post('/auth/login',{
         email,
         password
-      });
+      })
 
-      setSending(false)
-      
-      Swal.fire({
-        icon: 'info',
-        title: 'Gracias por registrate!',
-        text: user.msg,
-      });
+      /* console.log(`>>>>>> ${data}`); */
 
-      reset()
+      setAuth(data.user);
+      sessionStorage.setItem('token', data.token);
+
+      navigate('/projects')
       
     } catch (error) {
-      console.error(error);
-      handleShowAlert(error.response.user.msg);
-      reset()
+      /* console.error(`>>> ${error.response?.data.msg}`); */
+      handleShowAlert(error.response?.data.msg)
     }
-  }
-
-  const handleShowAlert = (msg) => {
-    setAlert({
-      msg
-    });
-
-    setTimeout(() => {
-      setAlert({});
-    }, 3000);
-  }
-
+  };
 
   return (
     <div className="contenedorRegister d-flex flex-column align-items-center justify-content-center">
      
     <div className="card d-flex flex-column align-items-center justify-content-center">
     <h1 className="register-titulo text-light">Logueate</h1>
+    {alert.msg && <Alert  { ...alert}/>}
       <div className="card2 d-flex flex-column">
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} noValidate>
       <div className="field mb-2">
         <i className="input-icon fa-regular fa-envelope"></i>
         <input className="input-field" id="email" name='email' value={email} type="email" placeholder="Ingresá tu email" onChange={handleInputChange}
@@ -92,6 +94,7 @@ function Login() {
           onChange={handleInputChange}
           />
         </div>
+      
       <div className="d-flex flex-column align-items-center justify-content-center mt-1 mb-3">
       <Button className="btn" type="submit">Iniciar sessión</Button>
       </div>
@@ -106,6 +109,4 @@ function Login() {
     </div>
   );
 };
-
-export default Login;
 

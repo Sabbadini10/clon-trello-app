@@ -4,7 +4,6 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    color: azure;
 }
 
 
@@ -17,7 +16,8 @@
 .card {
     width: 390px;
     padding: 1.9rem;
-    margin-top: 5em;
+    margin-top: 3em;
+    margin-bottom: 1.7em;
     text-align: center;
     background: #2a2b38;
     border: 3px solid  #ffeba7;

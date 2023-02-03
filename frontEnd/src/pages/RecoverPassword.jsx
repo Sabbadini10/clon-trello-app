@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import "../src/assets/styles/Register&Login.css";
-import PasswordField from "../src/components/PasswordField";
+import "../assets/styles/Register&Login.css";
 import { Link, useParams } from "react-router-dom";
 import { clientAxios } from "../config/clientAxios";
-import  AlertError  from "../src/components/AlertError";
+import  Alert  from "../components/Alert";
 
 function RecoverPassword() {
   const [alert, setAlert] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
   const [tokenChecked, setTokenChecked] = useState(false);
   const [password, setPassword] = useState("");
   const [changePassword, setChangePassword] = useState(false);
@@ -82,13 +82,22 @@ function RecoverPassword() {
           <>
             <h1>Reestablecé tu contraseña</h1>
 
-            {alert.msg && <AlertError {...alert} />}
+            {alert.msg && <Alert {...alert} />}
             {tokenChecked ? (
               <>
                 <form action="" noValidate onSubmit={handleSubmit}>
                   <div className="my-5">
                     <label htmlFor="password">Nueva contraseña</label>
-                   <PasswordField name={password}   placeholder="Escribí tu nueva contraseña"/>
+                    <div className=" field mb-3">
+    <span onClick={() => {setShowPassword(!showPassword)}}>
+      {showPassword ? <i className="input-icon fas fa-eye"></i> :  <i className="input-icon fas fa-eye-slash active" ></i>}
+      </span>
+        <input className="input-field" id="password" type="password" placeholder="Ingresá tu password" 
+          value={password}
+          name='password'
+          onChange={handleInputChange}
+          />
+        </div>
                   </div>
                   <button type="submit">Resetear contraseña</button>
                 </form>

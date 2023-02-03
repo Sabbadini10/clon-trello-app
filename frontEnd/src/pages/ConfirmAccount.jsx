@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { clientAxios } from "../config/clientAxios";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import  AlertError  from "../src/components/AlertError";
+import  Alert  from "../components/Alert";
 import Swal from "sweetalert2";
 
 function ConfirmAccount() {
@@ -46,7 +46,7 @@ function ConfirmAccount() {
       {alert.msg && (
         <div>
           <>
-            <AlertError {...alert} />
+            <Alert {...alert} />
             <nav>
               <Link to={"/register"}>¿No tenés una cuenta? Registrate</Link>
               <Link to={"/"}>¿Estás registrado? Iniciá sesión</Link>

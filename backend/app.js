@@ -8,6 +8,7 @@ const connectDB = require('./database/config');
 const app = express();
 
 const cors = require('cors');
+const checkToken = require('./middelware/checkToken');
 const whiteList = [process.env.URL_FRONTEND];
 const corsOptions = {
   origin : function (origin, cb) {
