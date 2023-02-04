@@ -5,6 +5,8 @@ import {Register} from "./pages/Register";
 import RecoverPassword from "./pages/RecoverPassword";
 import ForgetPassword from "./pages/ForgetPassword";
 import ConfirmAccount from "./pages/ConfirmAccount";
+import { ProtectedLayout } from './layout/ProtectedLayout'
+import { Projects } from './pages/Projects'
 import { AuthLayout } from "./layout/AuthLayout";
 import { AuthProvider } from "./context/AuthProvider";
 import { Error404 } from "./pages/Error404";
@@ -26,6 +28,15 @@ function App() {
             <Route path="/confirm/:token" element={<ConfirmAccount />} />
             <Route path="*" element={<Error404/>} />
           </Route>
+          <Route 
+          path='/projects'
+          element={<ProtectedLayout/>}
+          >
+            <Route
+              index
+              element={<Projects/>}
+            />
+        </Route>
         </Routes>
         </AuthProvider>
       </BrowserRouter>

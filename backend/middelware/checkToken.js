@@ -1,4 +1,4 @@
-const createHttpError = require('http-errors');
+const createError = require('http-errors');
 const { verify } = require('jsonwebtoken');
 
 
@@ -7,7 +7,7 @@ const { verify } = require('jsonwebtoken');
 module.exports = (req, res, next)=> {try {
 
     if(!req.headers.authorization){
-        throw createHttpError(401,"Se requiere un token");
+        throw createError(401,"Se requiere un token");
     }
 
     const token = req.headers.authorization;

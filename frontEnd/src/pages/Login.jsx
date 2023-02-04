@@ -25,7 +25,7 @@ export const Login = () => {
     if (time) {
       setTimeout(() => {
         setAlert({});
-      }, 3000);
+      }, 10000);
     }
   /* console.log(alert) */
     reset();

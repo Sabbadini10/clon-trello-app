@@ -68,7 +68,7 @@ module.exports = {
             if(!user.checked){
                 throw createError(403,"Tu cuenta no ha sido confirmada");
             };
-
+            console.log(`>>>>>>>> ${user}`)
             if(!await user.checkedPassword(password)){
                 throw createError(403,"Credenciales inválidas");
             }
@@ -77,7 +77,7 @@ module.exports = {
                 ok : true,
                 msg :'Usuario Logueado',
                 user : {
-                    nombre : user.name,
+                    name : user.name,
                     _id : user._id,
                 },
                 token : generateJWT({

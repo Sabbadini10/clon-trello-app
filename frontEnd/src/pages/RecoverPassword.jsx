@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
 import "../assets/styles/Register&Login.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { clientAxios } from "../config/clientAxios";
 import  Alert  from "../components/Alert";
 
@@ -80,8 +79,6 @@ function RecoverPassword() {
         </h1>
         <div className="card2 d-flex flex-column">
           <>
-            <h1>Reestablecé tu contraseña</h1>
-
             {alert.msg && <Alert {...alert} />}
             {tokenChecked ? (
               <>

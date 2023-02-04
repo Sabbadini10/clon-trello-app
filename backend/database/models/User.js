@@ -38,11 +38,12 @@ const { hash, compare} = require('bcryptjs')
         if(!this.isModified('password')){
             next()
         }
-        this.password = await hash(this.password, 10)
-    })
-
-    userSchema.method.checkedPassword = async function(password){
-        return await compare(password, this.password)
-    }
-
-    module.exports = moongoose.model('User', userSchema)
+    
+        this.password = await hash(this.password, 10);
+    });
+    
+    userSchema.methods.checkedPassword = async function(password){
+        return await compare(password, this.password);
+    };
+    
+    module.exports = moongoose.model('User',userSchema);

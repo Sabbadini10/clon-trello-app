@@ -5,49 +5,56 @@ import  Alert  from "../components/Alert";
 import Swal from "sweetalert2";
 
 function ConfirmAccount() {
-  const params = useParams();
-  const { token } = params;
-
-  const [alert, setAlert] = useState({});
+  
+  const {token} = useParams();
 
   const navigate = useNavigate();
 
-  handlerShowAlert(
+  const [alert, setAlert] = useState({});
+
+  const handleShowAlert = (msg) => {
     setAlert({
-      msg,
-    })
-  );
+      msg
+    });
+
+  };
 
   useEffect(() => {
-    const confirmAccount = async (data) => {
+   
+    const confirmAccount = async () => {
       try {
-        const url = `/auth/checked?token=${token}`;
-        const { data } = await clientAxios.get(url);
-        Swal.fire({
-          title: "Felicitaciones",
-          text: "Tu registración se ha completado con éxito",
-          confirmButtonText: "Iniciá sesión",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate("/");
-          }
-        });
-      } catch (error) {
-        console.error(error.response);
-        handleShowAlert(error.response.data.msg);
-      }
-    };
-    confirmAccount();
-  }, []);
 
+        const {data} = await clientAxios.get(`/auth/checked?token=${token}`);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Felicitaciones!',
+          text: data.msg,
+          confirmButtonText : "Iniciá sesión",
+          allowOutsideClick : false
+        }).then(result => {
+          if(result.isConfirmed){
+            navigate('/')
+          }
+        })        
+      } catch (error) {
+        console.error(error)
+        handleShowAlert(error.response?.data.msg)
+      }
+    }
+
+    confirmAccount();
+
+  }, []);
+  
   return (
     <>
-      <h1>Confirma tu cuenta</h1>
+      <h1 className="text-white text-center">Confirma tu cuenta</h1>
       {alert.msg && (
-        <div>
+        <div className="text-center">
           <>
             <Alert {...alert} />
-            <nav>
+            <nav className="d-flex align-items-center justify-content-center gap-2">
               <Link to={"/register"}>¿No tenés una cuenta? Registrate</Link>
               <Link to={"/"}>¿Estás registrado? Iniciá sesión</Link>
             </nav>
