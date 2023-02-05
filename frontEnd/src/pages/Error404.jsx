@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../../public/ERRORIMAGEN-removebg-preview.png'
+import  Logo  from '../assets/images/ERRORIMAGEN.png'
 import '../assets/styles/Error404.css';
 import { Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';

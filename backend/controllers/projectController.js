@@ -17,12 +17,7 @@ module.exports = {
   store: async (req, res) => {
     try {
       const { name, description, client } = req.body;
-      if (
-        [name, description, client].includes("") ||
-        !name ||
-        !description ||
-        !client
-      ) {
+      if ([name, description, client].includes("") || !name || !description || !client) {
         throw createHttpError(
           400,
           "El nombre, la descripción y el cliente son datos obligatorios"

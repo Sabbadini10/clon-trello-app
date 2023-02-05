@@ -1,6 +1,7 @@
 
 .contenedorRegister{
     width: 100%;
+    min-height: calc(100vh - 120px);
     text-align: center;
     margin-left: auto;
     margin-right: auto;

@@ -1,0 +1,13 @@
+.navbar{
+    height: 60px;
+    background: #2a2b38;
+    border-bottom: 3px solid  #ffeba7;
+}
+
+.form-control{
+    height: 30px;
+}
+
+.header-link{
+    font-size: 20px;
+}
