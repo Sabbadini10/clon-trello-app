@@ -1,31 +1,32 @@
 import React from "react";
+import "../assets/styles/Task.css"
 
 export const Task = () => {
   return (
-    <div className="flex justify-between bg-white p-5 mb-5 shadow-md">
-      <div>
-        <p className="mb-1 text-xl">Tarea</p>
-        <p className="mb-1 text-sm text-gray-500 uppercase">Descripción</p>
-        <p className="mb-1 text-xl">Fecha de entrega</p>
-        <p className="mb-1 text-gray-600">Prioridad</p>
+    <div className="d-flex flex-row justify-content-between">
+      <div className="d-flex flex-column gap-2 my-3">
+        <p className="mb-1 text-white">Tarea:</p>
+        <p className="mb-1 text-white">Descripción:</p>
+        <p className="mb-1 text-white">Fecha de entrega:</p>
+        <p className="mb-1 text-white">Prioridad:</p>
       </div>
-      <div className="flex flex-col lg:flex-row lg:items-start gap-2">
-        <button className="bg-indigo-600 p-2 text-white uppercase font-bold text-sm rounded-lg">
-          Editar
+      <div className="d-flex flex-row my-2 gap-3 mx-3">
+        <button className="btn-general-task buttom-editar">
+          EDITAR
         </button>
 
         {false ? (
-          <button className="bg-sky-600 p-2 text-white uppercase font-bold text-sm rounded-lg">
-            Completa
+          <button className="btn-general-task buttom-completa">
+            COMPLETA
           </button>
         ) : (
-          <button className="bg-gray-600 p-2 text-white uppercase font-bold text-sm rounded-lg">
-            Incompleta
+          <button className="btn-general-task buttom-incompleta">
+            INCOMPLETA
           </button>
         )}
 
-        <button className="bg-red-600 p-2 text-white uppercase font-bold text-sm rounded-lg">
-          Eliminar
+        <button className="btn-general-task buttom-eliminar">
+          ELIMINAR
         </button>
       </div>
     </div>

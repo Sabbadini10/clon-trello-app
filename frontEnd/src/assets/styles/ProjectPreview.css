@@ -1,14 +1,15 @@
-.card-project{
-    width: 850px;
-    height: 200px;
+.projects-preview-container{
+    margin-top: 2em;
+    width: 190px;
+    height: 150px;
     border-radius: 15px;
     background: #2a2b38;
     border: 3px solid  #ffeba7;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
-    margin-bottom: 6em;
 }
 
-.btn-general-project{
+
+.btn-general-project-preview{
     border: none;
     border-radius: 4px;
     font-weight: bold;
@@ -22,9 +23,8 @@
     transition: all .3s ease-in-out;
 }
 
-.btn-general-project:hover {
+.btn-general-project-preview:hover {
     background-color: #5e6681;
     color: #ffeba7;
     box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
    }
-   

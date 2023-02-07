@@ -4,6 +4,7 @@ import  Alert  from "../components/Alert";
 import { Collaborator } from "../components/Collaborator";
 import { Task } from "../components/Task";
 import { useProjects } from "../hooks/useProjects";
+import "../assets/styles/Project.css";
 
 function Project() {
   const { id } = useParams();
@@ -20,82 +21,51 @@ function Project() {
   return (
     <>
       {loading ? (
-        <p>Cargandooo</p>
+       <div className="spinner-border text-warning" role="status">
+       <span className="visually-hidden">Loading...</span>
+     </div>
       ) : (
         <div>
+          <div className="d-flex flex-row w-100 justify-content-between">
+            <div className="d-flex flex-column">
+            <div>
+            <h1 className="text-white">{name}</h1>
+            </div>
           <div>
-            <h1>{name}</h1>
-            <Link to={`/projects/edit-project/:id`}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832
-19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863
-4.487zm0 0L19.5 7.125"
-                />
-              </svg>
-              <p>Editar</p>
-            </Link>
-          </div>
-          <div>
-            <p>{client}</p>
+            <p className="text-white">{client}</p>
+            </div>
             <div
             /* onClick={} */
             >
-              <p>{description}</p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
-                />
-              </svg>
-              <p>Nueva Tarea</p>
+              <p className="text-white">{description}</p>
             </div>
-          </div>
-          {[1, 2].map((task) => (
+            </div>
+            <div className="d-flex flex-column my-2 gap-3">
+           
+            <Link to={`/projects/edit-project/:id`}>
+            <button className="btn-general-project"> <p ><i class="fa-solid fa-pencil"></i>&nbsp; Editar</p>
+            </button> 
+            </Link>
+              
+             <button className="btn-general-project">
+             <p ><i class="fa-solid fa-plus"></i>&nbsp; Nueva Tarea</p>
+             </button>
+           </div>
+            </div>
+          <div className="card-project px-4">
+          {[1].map((task) => (
             <Task />
           ))}
-          <div>
-            <p>Colaboradores</p>
-            <button
+          </div>
+          <div className="d-flex flex-row justify-content-between align-items-center my-2">
+            <p className="text-white">Colaboradores</p>
+            <button className="btn-general-project"
             /* onClick={} */
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75
-0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318
-0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
-                />
-              </svg>
-              <p>Agregar Colaborador</p>
+              <p><i class="fa-solid fa-user-plus"></i>&nbsp; Agregar Colaborador</p>
             </button>
           </div>
-          {[1, 2].map((collaborator) => (
+          {[].map((collaborator) => (
             <Collaborator />
           ))}
         </div>

@@ -1,19 +1,18 @@
 import React from "react";
+import "../assets/styles/Collaborator.css"
 
 export const Collaborator = () => {
   return (
-    <div  className="bg-white border shadow-md rounded p-5 justify-between flex items-center">
-    <p className="font-bold uppercase">
+    <div  className="d-flex flex-row justify-content-between align-items-center">
+    <p className="text-white">
       Nombre del colaborador
-      <span className="text-gray-600 lowercase">
+      <span className="text-white">
         | EMAIL
       </span>{" "}
     </p>
     <div>
-  
           <button 
-          className='bg-red-600 p-2 text-white uppercase font-bold text-sm rounded-lg'
-       
+          className='btn-general-collaborator'
           >
               Eliminar
           </button>

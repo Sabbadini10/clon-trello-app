@@ -98,7 +98,7 @@ function FormProject() {
         />
       </div>
       <div className="d-flex justify-content-center">
-        <button className="btn"> {false ? "Actualizar cambios" : "Guardar proyecto"}</button>
+        <button className="btn-general"> {false ? "Actualizar cambios" : "Guardar proyecto"}</button>
       </div>
     </form>
   );

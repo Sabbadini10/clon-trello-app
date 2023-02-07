@@ -96,7 +96,7 @@ function RecoverPassword() {
           />
         </div>
                   </div>
-                  <button type="submit">Resetear contraseña</button>
+                  <button className="btn-general" type="submit">Resetear contraseña</button>
                 </form>
               </>
             ) : (

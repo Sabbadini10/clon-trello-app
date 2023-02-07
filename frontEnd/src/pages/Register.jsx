@@ -154,7 +154,7 @@ export const Register = () => {
               />
             </div>
             <div className="d-flex flex-column align-items-center justify-content-center mt-1 mb-3">
-              <button className="btn" type="submit">
+              <button className="btn-general" type="submit">
                 Crear cuenta
               </button>
             </div>

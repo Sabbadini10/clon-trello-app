@@ -7,7 +7,7 @@ function ProjectEdit() {
         <h1 className="text-white">Editar proyecto: Nombre del proyecto</h1>
         <div>
           <span className="text-white"><i className="fa-solid fa-trash-can"></i></span>
-          <button className="btn"
+          <button className="btn-general"
           /* onClick={} */
           >
             Eliminar

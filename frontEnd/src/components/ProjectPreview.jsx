@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../assets/styles/Project.css";
+import "../assets/styles/ProjectPreview.css";
 
-function ProjectPreview(name, _id, client) {
+function ProjectPreview({name, _id, client}) {
  
   return (
-    <div>
+    <div className="projects-preview-container py-2 my-2 ">
       <p className="text-white">
         {name} <span className="text-white">{" | " + client}</span>
       </p>

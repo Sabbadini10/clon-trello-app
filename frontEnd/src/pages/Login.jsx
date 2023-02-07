@@ -92,7 +92,7 @@ export const Login = () => {
         </div>
       
       <div className="d-flex flex-column align-items-center justify-content-center mt-1 mb-3">
-      <Button className="btn" type="submit">Iniciar sessión</Button>
+      <Button className="btn-general" type="submit">Iniciar sesion</Button>
       </div>
       
     </Form>

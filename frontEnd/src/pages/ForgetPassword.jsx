@@ -63,7 +63,7 @@ function ForgetPassword() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <Button className="btn" type="submit" onClick={handleSubmit}>
+            <Button className="btn-general" type="submit" onClick={handleSubmit}>
               Recuperar contraseña
             </Button>
           </Form>
