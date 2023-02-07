@@ -30,7 +30,6 @@ export const ProtectedLayout = () => {
               <Outlet />
             </main>
             </div>
-           
             <Footer />
           </div>
         </div>

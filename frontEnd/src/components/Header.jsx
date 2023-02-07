@@ -4,7 +4,7 @@ import "../assets/styles/Header.css"
 function Header() {
   return (
  <nav className="Navbar navbar navbar-expand-lg">
-  <div class="container-fluid">
+  <div className="container-fluid">
   <h2 className="text-white text-start my-2">Projects Manager</h2>
       <form className="d-flex align-items-center" role="search">
         <input className="form-control me-2" type="search"  placeholder="Buscar proyecto..." aria-label="Search"/>

@@ -11,7 +11,7 @@ const { hash, compare} = require('bcryptjs')
         },
         description: {
             type: Date,
-            default: Data.now(), 
+            default: Date.now(), 
         },
         dataExpire: {
             type: data,

@@ -1,0 +1,105 @@
+
+import React from 'react'
+import { ProjectPreview } from '../components/ProjectPreview'
+
+export const Projects = () => {
+  const projects = [1,2]
+  return (
+    <>
+    <h1
+     className='text-4xl font-black'
+    >
+      Proyectos
+    </h1>
+    <div
+     className='bg-white p-5 shadow mt-10 rounded-md'
+    >
+      {
+        projects.length
+        ?
+        projects.map(project => <ProjectPreview key={project}/>)
+        :
+        <p>No hay proyectos agregados</p>
+      
+      }
+    </div>
+    </>
+  )
+}
+
+
+
+--------
+
+import React, { useContext } from 'react'
+import ProjectsContext from '../context/ProjectsProvider'
+
+export const useProjects = () => {
+  return useContext(ProjectsContext)
+}
+
+
+-------
+
+import React, { createContext, useState } from 'react';
+
+const ProjectsContext = createContext()
+
+const ProjectsProvider = ({children}) => {
+
+const [projects, setProjects] = useState([]);
+
+  return (
+    <ProjectsContext.Provider
+        value={{
+            projects
+        }}
+    >
+        {children}
+
+    </ProjectsContext.Provider>
+  )
+}
+
+export {
+    ProjectsProvider
+}
+
+export default ProjectsContext
+
+
+---------
+
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
+
+---------
+
+const {formValues, handleInputChange, reset} = useForm({
+    name : "",
+    description : "",
+    dateExpire : "",
+    client : ""
+  })
+
+  const {name, description, dateExpire, client} = formValues;
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+
+value={name}
+          onChange={handleInputChange}
+          name="name"
+
+----

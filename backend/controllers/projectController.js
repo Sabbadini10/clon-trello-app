@@ -1,59 +1,65 @@
+const createError = require("http-errors");
+const Project = require("../database/models/Project");
+const errorResponse = require("../helpers/errorResponse");
+const ObjectId = require("mongoose").Types.ObjectId;
+
 module.exports = {
   list: async (req, res) => {
     try {
       const projects = await Project.find().where("createdBy").equals(req.user);
+
       return res.status(200).json({
         ok: true,
+        msg: "Lista de Proyectos",
         projects,
       });
     } catch (error) {
       console.log(error);
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "HUBO UN ERROR PROJECT LIST",
-      });
+      return errorResponse(res, error, "LOGIN");
     }
   },
   store: async (req, res) => {
     try {
       const { name, description, client } = req.body;
-      if ([name, description, client].includes("") || !name || !description || !client) {
-        throw createHttpError(
-          400,
-          "El nombre, la descripción y el cliente son datos obligatorios"
-        );
-      }
-      if (!req.user) throw createHttpError(401, "Error de autenticación");
+
+      if (
+        [name, description, client].includes("") ||
+        !name ||
+        !description ||
+        !client
+      )
+        throw createError(400, "Todos los campos son obligatorios");
+console.log(">>>>>>>>> " + req.user)
+      if (!req.user) throw createError(401, "Error de autenticación");
+
       const project = new Project(req.body);
       project.createdBy = req.user._id;
+
+      //console.log(project)
       const projectStore = await project.save();
+
       return res.status(201).json({
         ok: true,
+        msg: "Proyecto guardado exitosamente",
         project: projectStore,
       });
     } catch (error) {
       console.log(error);
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "HUBO UN ERROR EN PROJECT STORE",
-      });
+      return errorResponse(res, error, "LOGIN");
     }
   },
   detail: async (req, res) => {
     try {
       const { id } = req.params;
-      if (!require("mongoose").Types.ObjectId.isValid(id))
-        throw createError(400, "No es un ID válido");
+      if (!ObjectId.isValid(id)) throw createError(400, "No es un ID válido");
+
       const project = await Project.findById(id);
-      if (!project) {
-        throw createError(404, "Proyecto no encontrado");
-      }
-      if (req.user._id.toString() !== project.createdBy.toString()) {
-        throw createError(
-          401,
-          "No tenés la autorización para ver este proyecto"
-        );
-      }
+
+      if (!project) throw createError(404, "Proyecto no encontrado");
+
+      if (req.user._id.toString() !== project.createdBy.toString())
+        throw createError(401, "No estás autorizado/a");
+
       return res.status(200).json({
         ok: true,
         msg: "Detalle del Proyecto",
@@ -61,98 +67,88 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "HUBO UN ERROR EN PROJECT DETAIL",
-      });
+      return errorResponse(res, error, "LOGIN");
     }
   },
   update: async (req, res) => {
     try {
       const { id } = req.params;
-      if (!require("mongoose").Types.ObjectId.isValid(id))
-        throw createError(400, "No es un ID válido");
+      if (!ObjectId.isValid(id)) throw createError(400, "No es un ID válido");
+
       const project = await Project.findById(id);
-      if (!project) {
-        throw createError(404, "Proyecto no encontrado");
-      }
-      if (req.user._id.toString() !== project.createdBy.toString()) {
-        throw createError(
-          401,
-          "No tenés la autorización para actualizar este proyecto"
-        );
-      }
+
+      if (!project) throw createError(404, "Proyecto no encontrado");
+
+      if (req.user._id.toString() !== project.createdBy.toString())
+        throw createError(401, "No estás autorizado/a");
+
       const { name, description, client, dataExpire } = req.body;
+
       project.name = name || project.name;
       project.description = description || project.description;
-      project.dateExpire = dateExpire || project.dateExpire;
       project.client = client || project.client;
-      const projectUpdate = await project.save();
+      project.dataExpire = dataExpire || project.dataExpire;
+
+      const projecUpdated = await project.save();
+
       return res.status(201).json({
         ok: true,
-        project: projectUpdate,
+        msg: "Proyecto actualizado",
+        project: projecUpdated,
       });
     } catch (error) {
       console.log(error);
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "HUBO UN ERROR UPDATE PROJECT",
-      });
+      return errorResponse(res, error, "LOGIN");
     }
   },
   remove: async (req, res) => {
     try {
       const { id } = req.params;
-      if (!require("mongoose").Types.ObjectId.isValid(id))
-        throw createError(400, "No es un ID válido");
+      if (!ObjectId.isValid(id)) throw createError(400, "No es un ID válido");
+
       const project = await Project.findById(id);
-      if (!project) {
-        throw createError(404, "Proyecto no encontrado");
-      }
-      if (req.user._id.toString() !== project.createdBy.toString()) {
-        throw createError(
-          401,
-          "No tenés la autorización para eliminar este proyecto"
-        );
-      }
+
+      if (!project) throw createError(404, "Proyecto no encontrado");
+
+      if (req.user._id.toString() !== project.createdBy.toString())
+        throw createError(401, "No estás autorizado/a");
+
       await project.deleteOne();
-      return res.status(201).json({
+
+      return res.status(200).json({
         ok: true,
-        msg: "Proyecto eliminado con éxito.",
+        msg: "Proyecto eliminado con éxito",
+      });
+    } catch (error) {
+      console.log(error);
+      return errorResponse(res, error, "LOGIN");
+    }
+  },
+  addCollaborator: async (req, res) => {
+    try {
+      return res.status(200).json({
+        ok: true,
+        msg: "Colaborador agregado",
       });
     } catch (error) {
       console.log(error);
       return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || "HUBO UN ERROR REMOVE PROJECT",
+        msg: error.message || "Upss, hubo un error en COLLABORATOR-ADD",
       });
     }
   },
-  addColaborator: async (req, res) => {
+  removeCollaborator: async (req, res) => {
     try {
-      return res.status(201).json({
+      return res.status(200).json({
         ok: true,
-        msg: "ADD COLABORATOR PROJECT",
+        msg: "Colaborador eliminado",
       });
     } catch (error) {
       console.log(error);
       return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || "HUBO UN ERROR ADD COLABORATOR",
-      });
-    }
-  },
-  removeColaborator: async (req, res) => {
-    try {
-      return res.status(201).json({
-        ok: true,
-        msg: "REMOVE COLABORATOR PROJECT",
-      });
-    } catch (error) {
-      console.log(error);
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "HUBO UN ERROR REMOVE COLABORATOR",
+        msg: error.message || "Upss, hubo un error en COLLABORATOR-REMOVE",
       });
     }
   },

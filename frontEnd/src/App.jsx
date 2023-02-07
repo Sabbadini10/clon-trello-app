@@ -12,6 +12,7 @@ import ProjectAdd from "./pages/ProjectAdd";
 import ProjectEdit from "./pages/ProjectEdit";
 import { AuthLayout } from "./layout/AuthLayout";
 import { AuthProvider } from "./context/AuthProvider";
+import { ProjectsProvider } from "./context/ProjectsProvider";
 import { Error404 } from "./pages/Error404";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     <div className="App bg-opacity-75">
       <BrowserRouter>
         <AuthProvider>
+        <ProjectsProvider>
           <Routes>
             <Route path="/" element={<AuthLayout />}>
               <Route index element={<Login />} />
@@ -35,6 +37,7 @@ function App() {
               <Route path=":id" element={<Project />} />
             </Route>
           </Routes>
+          </ProjectsProvider>
         </AuthProvider>
       </BrowserRouter>
     </div>

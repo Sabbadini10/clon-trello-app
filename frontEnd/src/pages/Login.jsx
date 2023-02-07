@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import { Button, Form, Nav } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import '../assets/styles/Register&Login.css';
@@ -10,27 +10,24 @@ import Alert from "../components/Alert";
 
 
 export const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [alert, setAlert] = useState({});
   const {setAuth} = useAuth();
-  const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  const [sending, setSending] = useState(false);
-
+  const navigate = useNavigate()
 
   const handleShowAlert = (msg, time = true) => {
     setAlert({
-      msg: msg,
+      msg,
     });
-  
+
     if (time) {
       setTimeout(() => {
         setAlert({});
-      }, 10000);
+      }, 3000);
     }
-  /* console.log(alert) */
+
     reset();
   };
-
 
   const { formValues, handleInputChange, reset } = useForm({
     email: "",
@@ -38,18 +35,14 @@ export const Login = () => {
   });
 
   const { email, password } = formValues;
- 
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if ([email, password].includes("")) {
       handleShowAlert("Todos los campos son obligatorios");
-
-      console.log(alert)
       return null;
     }
-
 
     try {
 
@@ -58,7 +51,7 @@ export const Login = () => {
         password
       })
 
-      /* console.log(`>>>>>> ${data}`); */
+      console.log(">>>>>>>>>>>>>>>>>>>>>" + data.user)
 
       setAuth(data.user);
       sessionStorage.setItem('token', data.token);
@@ -66,10 +59,13 @@ export const Login = () => {
       navigate('/projects')
       
     } catch (error) {
-      /* console.error(`>>> ${error.response?.data.msg}`); */
+      console.error(error)
       handleShowAlert(error.response?.data.msg)
     }
+
+
   };
+
 
   return (
     <div className="contenedorRegister d-flex flex-column align-items-center justify-content-center">

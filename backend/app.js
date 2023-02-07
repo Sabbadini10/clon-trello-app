@@ -37,7 +37,7 @@ var apiTask = require('./routes/task')
 app
   .use('/api/auth', apiAuth)
   .use('/api/users', apiUsers)
-  .use('/api/projects', apiProject)
+  .use('/api/projects', checkToken, apiProject)
   .use('/api/tasks', apiTask)
 
 

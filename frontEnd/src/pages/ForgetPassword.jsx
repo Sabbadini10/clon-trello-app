@@ -53,7 +53,7 @@ function ForgetPassword() {
         <div className="card2 d-flex flex-column">
           <Form onSubmit={handleSubmit}>
             <div className="field mb-2">
-              <i class="input-icon fa-regular fa-envelope"></i>
+              <i className="input-icon fa-regular fa-envelope"></i>
               <input
                 className="input-field"
                 id="email"
