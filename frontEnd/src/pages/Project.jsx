@@ -55,9 +55,9 @@ function Project() {
              </button>
            </div>
             </div>
-          <div className=" ">
+          <div>
           {[1,2,3,4].map((task) => (
-            <div className="card-project d-flex flex-column px-4 my-2">
+            <div className="card-project bg-dark bg-opacity-75  d-flex flex-column px-4 my-2">
               <Task />
             </div>
             
