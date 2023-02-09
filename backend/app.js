@@ -59,7 +59,7 @@ app
   .use('/api/auth', apiAuth)
   .use('/api/users', apiUsers)
   .use('/api/projects', checkToken, apiProject)
-  .use('/api/tasks',checkToken,require('apiTask'))
+  .use('/api/tasks', checkToken, apiTask)
 
 
 

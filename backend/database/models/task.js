@@ -1,8 +1,8 @@
-const moongoose = require('mongoose')
+const mongoose = require('mongoose')
 const { hash, compare} = require('bcryptjs')
 
 
-    const Schema = moongoose.Schema
+    const Schema = mongoose.Schema
     const taskSchema = new Schema({
         name: {
             type: String,
@@ -14,7 +14,7 @@ const { hash, compare} = require('bcryptjs')
             default: Date.now(), 
         },
         dataExpire: {
-            type: data,
+            type: Date,
             required: true,
             trim: true
         },
@@ -37,4 +37,4 @@ const { hash, compare} = require('bcryptjs')
 
 
 
-    module.exports = moongoose.model('Task', taskSchema)
+    module.exports = mongoose.model('Task', taskSchema)
