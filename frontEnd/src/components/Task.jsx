@@ -3,7 +3,7 @@ import "../assets/styles/Task.css"
 
 export const Task = () => {
   return (
-    <div className="bg-dark bg-opacity-75 d-flex flex-row justify-content-between">
+    <div className="d-flex flex-row justify-content-between">
       <div className="d-flex flex-column gap-2 my-3">
         <p className="mb-1 text-white">Tarea:</p>
         <p className="mb-1 text-white">Descripción:</p>

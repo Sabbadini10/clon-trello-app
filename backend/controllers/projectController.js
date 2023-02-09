@@ -3,6 +3,7 @@ const Project = require("../database/models/Project");
 const errorResponse = require("../helpers/errorResponse");
 const ObjectId = require("mongoose").Types.ObjectId;
 
+
 module.exports = {
   list: async (req, res) => {
     try {
@@ -53,8 +54,7 @@ module.exports = {
       const { id } = req.params;
       if (!ObjectId.isValid(id)) throw createError(400, "No es un ID válido");
 
-      const project = await Project.findById(id);
-
+      const project = await Project.findById(id).populate('tasks');
       if (!project) throw createError(404, "Proyecto no encontrado");
 
       if (req.user._id.toString() !== project.createdBy.toString())

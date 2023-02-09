@@ -22,7 +22,7 @@ function Project() {
  
 
   return (
-    <>
+    <div className="contenedor-proyecto-principal">
       {loading ? (
        <div className="spinner-border text-warning" role="status">
        <span className="visually-hidden">Loading...</span>
@@ -55,25 +55,28 @@ function Project() {
              </button>
            </div>
             </div>
-          <div className="card-project px-4 bg-dark bg-opacity-75">
-          {[1].map((task) => (
-            <Task />
+          <div className=" ">
+          {[1,2,3,4].map((task) => (
+            <div className="card-project d-flex flex-column px-4 my-2">
+              <Task />
+            </div>
+            
           ))}
           </div>
-          <div className="d-flex flex-row justify-content-between align-items-center my-2">
+         <div className="d-flex flex-row justify-content-between align-items-center my-2">
             <p className="text-white">Colaboradores</p>
             <button className="btn-general-project"
-            /* onClick={} */
+             /* onClick={}  */
             >
               <p><i className="fa-solid fa-user-plus"></i>&nbsp; Agregar Colaborador</p>
             </button>
           </div>
-          {[].map((collaborator) => (
+          {[1,2,3].map((collaborator) => (
             <Collaborator />
-          ))}
+          ))} 
         </div>
       )}
-    </>
+    </div>
   );
 }
 

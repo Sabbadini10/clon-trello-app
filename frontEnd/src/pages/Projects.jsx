@@ -16,7 +16,7 @@ function Projects() {
   }
 
   return (
-    <div className="bg-dark bg-opacity-75 w-100 d-flex flex-column align-items-center justify-content-center">
+    <div className=" w-100 d-flex flex-column align-items-center justify-content-center">
       <div className=''>
       <h1 className="text-white text-center display-6">Proyectos</h1>
       </div>
