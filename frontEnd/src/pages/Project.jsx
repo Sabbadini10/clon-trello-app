@@ -6,9 +6,10 @@ import { Task } from "../components/Task";
 import { useProjects } from "../hooks/useProjects";
 import "../assets/styles/Project.css";
 
+
 function Project() {
   const { id } = useParams();
-  const { loading, alert, getProject, project } = useProjects();
+  const { loading, alert, getProject, project, deleteProject } = useProjects();
 
   const { name, description, dateExpire, client } = project;
 
@@ -18,6 +19,8 @@ function Project() {
 
   if (alert.msg) return <Alert {...alert} />;
 
+ 
+
   return (
     <>
       {loading ? (
@@ -26,7 +29,7 @@ function Project() {
      </div>
       ) : (
         <div>
-          <div className="d-flex flex-row w-100 justify-content-between">
+          <div className=" d-flex flex-row w-100 justify-content-between">
             <div className="d-flex flex-column">
             <div>
             <h1 className="text-white">{name}</h1>
@@ -42,17 +45,17 @@ function Project() {
             </div>
             <div className="d-flex flex-column my-2 gap-3">
            
-            <Link to={`/projects/edit-project/:id`}>
+            <Link to={`/projects/edit-project/${id}`}>
             <button className="btn-general-project"> <p ><i class="fa-solid fa-pencil"></i>&nbsp; Editar</p>
             </button> 
             </Link>
               
              <button className="btn-general-project">
-             <p ><i class="fa-solid fa-plus"></i>&nbsp; Nueva Tarea</p>
+             <p ><i className="fa-solid fa-plus"></i>&nbsp; Nueva Tarea</p>
              </button>
            </div>
             </div>
-          <div className="card-project px-4">
+          <div className="card-project px-4 bg-dark bg-opacity-75">
           {[1].map((task) => (
             <Task />
           ))}
@@ -62,7 +65,7 @@ function Project() {
             <button className="btn-general-project"
             /* onClick={} */
             >
-              <p><i class="fa-solid fa-user-plus"></i>&nbsp; Agregar Colaborador</p>
+              <p><i className="fa-solid fa-user-plus"></i>&nbsp; Agregar Colaborador</p>
             </button>
           </div>
           {[].map((collaborator) => (

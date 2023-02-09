@@ -10,7 +10,7 @@ export const ProtectedLayout = () => {
 
   if (loading) {
     return (
-      <div className="protected-layout-container">
+      <div className="protected-layout-container ">
         <div className="spinner-border text-warning" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>

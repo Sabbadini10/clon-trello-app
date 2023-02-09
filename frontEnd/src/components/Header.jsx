@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../assets/styles/Header.css"
 function Header() {
   return (
- <nav className="Navbar navbar navbar-expand-lg">
+ <nav className="Navbar navbar navbar-expand-lg bg-dark bg-opacity-75">
   <div className="container-fluid">
   <h2 className="text-white text-start my-2">Projects Manager</h2>
       <form className="d-flex align-items-center" role="search">

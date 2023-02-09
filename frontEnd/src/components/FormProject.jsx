@@ -1,41 +1,70 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useForm } from "../hooks/useForm";
 import { useProjects } from "../hooks/useProjects";
 import  Alert  from "./Alert";
 import "../assets/styles/FormProject.css";
+import { useParams } from "react-router-dom";
 
 
 function FormProject() {
-  const {alert, showAlert, storeProject} = useProjects();
+  
+  let { alert, showAlert, storeProject } = useProjects();
 
-  const {formValues, handleInputChange, reset} = useForm({
-    name : "",
-    description : "",
-    dateExpire : "",
-    client : ""
-  })
+  const { id } = useParams();
 
-  const {name, description, dateExpire, client} = formValues;
+  const inputName = useRef(null);
+  const inputDescription = useRef(null);
+  const inputDateExpire = useRef(null);
+  const inputClient = useRef(null);
+
+  const { loading, formValues, handleInputChange, reset, setFormValues } = useForm({
+    name: "",
+    description: "",
+    dateExpire: "",
+    client: "",
+  });
+
+  let { name, description, dateExpire, client } = formValues;
+
+  useEffect(() => {
+    
+    if (id) {
+
+      let project = JSON.parse(sessionStorage.getItem('project'))
+
+      inputName.current.value = project.name;
+      inputDescription.current.value = project.description;
+      inputDateExpire.current.value = project.dateExpire && project.dateExpire.split("T")[0];
+      inputClient.current.value = project.client;
+
+      setFormValues({
+        name: project.name,
+        description: project.description,
+        dateExpire: project.dateExpire.split('T')[0],
+        client: project.client,
+      });
+    }
+  }, [id]);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if([name,description,dateExpire,client].includes("")){
+    e.preventDefault();
+    if ([name, description, dateExpire, client].includes("")) {
       showAlert("Todos los campos son obligatorios");
-      return null
-    };
+      return null;
+    }
 
     storeProject({
+      id: id ? id : null,
       name,
       description,
       dateExpire,
-      client
-    })
-  }
-
+      client,
+    });
+  };
 
   return (
     <form
-      className="form-card px-2 py-2 mb-3"
+      className="form-card bg-dark bg-opacity-75 px-2 py-2 mb-3"
       onSubmit={handleSubmit}
     >
        {
@@ -53,6 +82,7 @@ function FormProject() {
           value={name}
           name="name"
           onChange={handleInputChange}
+          ref={inputName}
         />
       </div>
       <div className="mb-1">
@@ -68,6 +98,7 @@ function FormProject() {
           value={description}
           name="description"
           onChange={handleInputChange}
+          ref={inputDescription}
         />
       </div>
       <div className="mb-1">
@@ -81,6 +112,7 @@ function FormProject() {
           value={dateExpire}
           name="dateExpire"
           onChange={handleInputChange}
+          ref={inputDateExpire}
         />
       </div>
       <div className="mb-1">
@@ -95,6 +127,7 @@ function FormProject() {
           value={client}
           name="client"
           onChange={handleInputChange}
+          ref={inputClient}
         />
       </div>
       <div className="d-flex justify-content-center">

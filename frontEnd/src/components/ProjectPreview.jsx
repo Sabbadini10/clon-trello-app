@@ -5,7 +5,7 @@ import "../assets/styles/ProjectPreview.css";
 function ProjectPreview({name, _id, client}) {
  
   return (
-    <div className="projects-preview-container py-2 my-2 ">
+    <div className="projects-preview-container bg-dark bg-opacity-75 py-2 my-2 ">
       <p className="text-white">
         {name} <span className="text-white">{" | " + client}</span>
       </p>

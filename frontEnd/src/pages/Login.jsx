@@ -70,7 +70,7 @@ export const Login = () => {
   return (
     <div className="contenedorRegister d-flex flex-column align-items-center justify-content-center">
      
-    <div className="card d-flex flex-column align-items-center justify-content-center">
+    <div className="card bg-dark bg-opacity-75 d-flex flex-column align-items-center justify-content-center">
     <h1 className="register-titulo text-light">Logueate</h1>
     {alert.msg && <Alert  { ...alert}/>}
       <div className="card2 d-flex flex-column">

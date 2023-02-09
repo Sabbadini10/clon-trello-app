@@ -6,7 +6,7 @@ const ObjectId = require("mongoose").Types.ObjectId;
 module.exports = {
   list: async (req, res) => {
     try {
-      const projects = await Project.find().where("createdBy").equals(req.user);
+      const projects = await Project.find().where("createdBy").equals(req.user).select('name client');
 
       return res.status(200).json({
         ok: true,
@@ -29,7 +29,7 @@ module.exports = {
         !client
       )
         throw createError(400, "Todos los campos son obligatorios");
-console.log(">>>>>>>>> " + req.user)
+
       if (!req.user) throw createError(401, "Error de autenticación");
 
       const project = new Project(req.body);
@@ -82,12 +82,12 @@ console.log(">>>>>>>>> " + req.user)
       if (req.user._id.toString() !== project.createdBy.toString())
         throw createError(401, "No estás autorizado/a");
 
-      const { name, description, client, dataExpire } = req.body;
+      const { name, description, client, dateExpire } = req.body;
 
       project.name = name || project.name;
       project.description = description || project.description;
       project.client = client || project.client;
-      project.dataExpire = dataExpire || project.dataExpire;
+      project.dateExpire = dateExpire || project.dateExpire;
 
       const projecUpdated = await project.save();
 

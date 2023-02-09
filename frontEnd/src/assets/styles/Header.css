@@ -1,7 +1,6 @@
 .navbar{
     height: 60px;
-    background: #2a2b38;
-    border-bottom: 3px solid  #ffeba7;
+    border-bottom: 1px solid  #ffeba7;
 }
 
 .form-control{
