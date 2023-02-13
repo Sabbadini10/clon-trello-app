@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const projectSchema = new mongoose.Schema({
+
+const Schema = mongoose.Schema;
+const projectSchema = new Schema({
     name : {
         type : String,
         required : true,
@@ -30,12 +32,12 @@ const projectSchema = new mongoose.Schema({
             ref : 'User',
         },
     ],
-    tasks : [
+     tasks : [
         {
         type:mongoose.Schema.Types.ObjectId,
         ref: 'Task',
         }
-        ]
+        ] 
 },
 {
     timestamps :  true
