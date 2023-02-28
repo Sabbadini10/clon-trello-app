@@ -1,105 +1,140 @@
-const Task = require("../database/models/Task")
-const Project = require("../database/models/Project")
 const createError = require("http-errors");
+const Task = require("../database/models/Task");
 const errorResponse = require("../helpers/errorResponse");
-const ObjectId = require("mongoose").Types.ObjectId;
+const ObjetcId = require("mongoose").Types.ObjectId
 
 module.exports = {
-    list: async (req, res) => {
+    list : async (req,res) => {
         try {
-            return res.status(201).json({
-                ok: true,
-                msg: 'TASK LIST'
-            })
-        } catch (error) {
-            console.log(error)
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error.message || 'HUBO UN ERROR TASK LIST'
-            })
-        }
-    },
-    store: async (req, res) => {
-        try {
-            const { name, description, priority, project: projectId } = req.body;
-            if (
-                [name, description, priority].includes("") ||
-                !name ||
-                !description ||
-                !priority
-            )
-                throw createError(400, "Todos los campos son obligatorios");
+            const {project} = req.query;
+            if(!ObjetcId.isValid(project)) throw createError(404,"No es un ID valido");
 
-            const project = await Project.findById(projectId);
-            if (req.user._id.toString() !== project.createdBy.toString()) throw createError(403, "No estás autorizado");
-            const taskStore = await Task.create(req.body);
-            project.tasks.push(taskStore._id);
-            await project.save();
-            return res.status(201).json({
-                ok: true,
-                msg: 'Tarea guardada con éxito',
-                task: taskStore
-            })
-        } catch (error) {
-            console.log(error);
-            return errorResponse(res, error, "STORE-TASK");
-        }
+            const tasks = await Task.find().where("project").equals(project).select("-createdAt -__v")
 
-    },
-    detail: async (req, res) => {
-        try {
-            return res.status(201).json({
-                ok: true,
-                msg: 'TASK DETAIL'
+            return res.status(200).json({
+                ok : true,
+                msg :'Lista de Tareas',
+                tasks
             })
         } catch (error) {
-            console.log(error)
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error.message || 'HUBO UN ERROR TASK DETAIL'
-            })
+            return errorResponse(res, error, "TASKS-LIST")
         }
     },
-    update: async (req, res) => {
+    store : async (req,res) => {
         try {
+            const {name, description, project} = req.body;
+            if([name, description, project].includes("") || !name || !description || !project) throw createError(400,"Todos los campos son obligatorios");
+
+            if (!req.user) throw createError(401,"Error de autenticacion");
+
+            const task = new Task(req.body)
+            task.createdBy = req.user._id;
+
+            const taskStore = await task.save()
+
             return res.status(201).json({
-                ok: true,
-                msg: 'TASK UPDATE'
+                ok : true,
+                msg :'Tarea guardada exitosamente',
+                taskStore
             })
         } catch (error) {
-            console.log(error)
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error.message || 'HUBO UN ERROR TASK UPDATE'
+            return errorResponse(res, error, "STORE-TASK")
+        }
+       
+    },
+    detail : async (req,res) => {
+        try {
+            const {id} = req.params;
+            if(!ObjetcId.isValid(id)) throw createError(404,"No es un ID valido");
+
+            const task = await Task.findById(id).select("-createdAt -__v")
+            if (!task) throw createError(404,"Proyecto no encontrado");
+
+            if (req.user._id.toString() !== task.createdBy.toString()) throw createError(401,"No estas autorizade");
+
+            return res.status(200).json({
+                ok : true,
+                msg :'Detalle de la Tarea',
+                task
             })
+        } catch (error) {
+            return errorResponse(res, error, "TASKS-DETAIL")
+        }
+       
+    },
+    update : async (req,res) => {
+        try {
+            const {id} = req.params;
+            if(!ObjetcId.isValid(id)) throw createError(404,"No es un ID valido");
+
+            const task = await Task.findById(id).select("-createdAt -__v")
+            if (!task) throw createError(404,"Proyecto no encontrado");
+
+            if (req.user._id.toString() !== task.createdBy.toString()) throw createError(401,"No estas autorizade");
+
+            const {name, description, state, dateExpire, priority} = req.body;
+
+            if (priority && !priority.includes("Baja") && !priority.includes("Media") && !priority.includes("Alta")) throw createError(404,"No es una prioridad valida");
+
+            task.name = name || task.name;
+            task.description = description || task.description;
+            task.state = state || task.state;
+            task.dateExpire = dateExpire || task.dateExpire;
+            task.priority = priority || task.priority;
+
+            const taskUpdated = await task.save()
+
+            return res.status(201).json({
+                ok : true,
+                msg :'Tarea actualizada',
+                taskUpdated
+            })
+        } catch (error) {
+            return errorResponse(res, error, "TASKS-UPDATE")
         }
     },
-    remove: async (req, res) => {
+    remove : async (req,res) => {
         try {
-            return res.status(201).json({
-                ok: true,
-                msg: 'TASK REMOVE'
+            const {id} = req.params;
+            if(!ObjetcId.isValid(id)) throw createError(404,"No es un ID valido");
+
+            const task = await Task.findById(id).select("-createdAt -__v")
+            if (!task) throw createError(404,"Proyecto no encontrado");
+
+            if (req.user._id.toString() !== task.createdBy.toString()) throw createError(401,"No estas autorizade");
+
+            await task.deleteOne()
+
+            return res.status(200).json({
+                ok : true,
+                msg :'Tarea eliminada'
             })
         } catch (error) {
-            console.log(error)
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error.message || 'HUBO UN ERROR TASK REMOVE'
-            })
+            return errorResponse(res, error, "TASKS-REMOVE")
         }
     },
-    changeState: async (req, res) => {
+    changeState : async (req,res) => {
         try {
-            return res.status(201).json({
-                ok: true,
-                msg: 'TASK CHANGE STATE'
+            const {id} = req.params;
+            if(!ObjetcId.isValid(id)) throw createError(404,"No es un ID valido");
+
+            const task = await Task.findById(id).select("-createdAt -__v")
+            if (!task) throw createError(404,"Proyecto no encontrado");
+
+            if (req.user._id.toString() !== task.createdBy.toString()) throw createError(401,"No estas autorizade");
+
+            task.state = !task.state
+
+            await task.save()
+
+            return res.status(200).json({
+                ok : true,
+                msg :'Tarea completada',
+                task
             })
         } catch (error) {
-            console.log(error)
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error.message || 'HUBO UN ERROR TASK CHANGE STATE'
-            })
+            return errorResponse(res, error, "TASKS-CHANGE-STATE")
         }
-    }
+    },
+ 
 }

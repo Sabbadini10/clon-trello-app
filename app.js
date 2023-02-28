@@ -27,7 +27,7 @@ app
   .use(logger('dev'))
   .use(express.json())
   .use(express.urlencoded({ extended: false }))
-  .use(cors)
+  .use(cors())
 
 var apiAuth = require('./routes/auth')
 var apiUsers = require('./routes/users')
@@ -38,7 +38,7 @@ var apiTask = require('./routes/task')
   /* RUTAS */
 app
   .use('/api/auth', apiAuth)
-  .use('/api/users', apiUsers)
+  .use('/api/users', checkToken, apiUsers)
   .use('/api/projects', checkToken, apiProject)
   .use('/api/tasks', checkToken, apiTask)
 
