@@ -27,7 +27,7 @@ app
   .use(logger('dev'))
   .use(express.json())
   .use(express.urlencoded({ extended: false }))
-  .use(cors())
+  .use(cors)
 
 var apiAuth = require('./routes/auth')
 var apiUsers = require('./routes/users')
