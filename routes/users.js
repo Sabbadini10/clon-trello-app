@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router() ;
 
 const {profile, update, remove} = require('../controllers/userController');
 const checkToken = require('../middelware/checkToken');
